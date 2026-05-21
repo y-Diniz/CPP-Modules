@@ -34,15 +34,14 @@ AForm* Intern::makeForm( const std::string& form_name, const std::string& target
 		if ( names[i] == form_name)
 			break ;
 
+	if ( i < 3)
+		std::cout << "Intern makes " << names[i] << std::endl;
+
 	switch (i) {
-		case 0:
-			 return new PresidentialPardonForm( target );
-		case 1:
-			return new RobotomyRequestForm( target );
-		case 2:
-			return new ShrubberyCreationForm( target );
-		default:
-			throw FormDoesNotExist();
+		case 0: return new PresidentialPardonForm( target );
+		case 1: return new RobotomyRequestForm( target );
+		case 2: return new ShrubberyCreationForm( target );
+		default: throw FormDoesNotExist();
 	}
 }
 
