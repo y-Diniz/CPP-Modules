@@ -14,8 +14,7 @@ BLUE		:= \033[0;34m
 RESET		:= \033[0m
 
 # Files
-INCLUDES	:= 
-SRC			:= main.cpp
+SRC			:= main.cpp ScalarConverter.cpp
 OBJ			:= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 $(NAME): $(OBJ)
