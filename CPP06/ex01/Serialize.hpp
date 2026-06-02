@@ -3,6 +3,10 @@
 
 # include <stdint.h>
 
+struct Data {
+	int n;
+};
+
 class Serialize {
 
 	private:
@@ -12,11 +16,6 @@ class Serialize {
 		~Serialize();
 
 	public:
-		class Data {
-			public:
-				int* ptr;
-		};
-		
 		static uintptr_t serialize( Data* ptr );
 		static Data* deserialize( uintptr_t raw );
 

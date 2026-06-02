@@ -9,9 +9,9 @@ Serialize& Serialize::operator=(  const Serialize& src  ) { (void)src; return *t
 Serialize::~Serialize() { }
 
 uintptr_t Serialize::serialize( Data* ptr ) {
-
+	return reinterpret_cast<uintptr_t>(ptr);
 }
 
-Serialize::Data* Serialize::deserialize( uintptr_t raw ) {
-
+Data* Serialize::deserialize( uintptr_t raw ) {
+	return reinterpret_cast<Data *>(raw);
 }
