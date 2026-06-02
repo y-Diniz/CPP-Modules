@@ -3,14 +3,17 @@
 
 int main() {
 
-	Data *d = new Data;
-	std::cout << "Data address: " << d << std::endl;
-	uintptr_t i = Serialize::serialize(d);
-	std::cout << "Data serialized: " << i << std::endl;
-	d = Serialize::deserialize(i);
-	std::cout << "Data deserialized: " << d << std::endl;
+	Data data;
+	Data *ptr = &data;
+	std::cout << "Data address: " << ptr << std::endl;
 
-	delete d;
+	uintptr_t raw = Serialize::serialize(ptr);
+	std::cout << "Data serialized: " << raw << std::endl;
+
+	Data *ptr2 = Serialize::deserialize(raw);
+	std::cout << "Data deserialized: " << ptr2 << std::endl;
+
+	std::cout << "ptr == ptr2: " << (ptr == ptr2 ? 1 : 0) << std::endl ;
 
 	return 0;
 }
