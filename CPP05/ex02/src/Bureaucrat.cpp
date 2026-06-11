@@ -44,19 +44,19 @@ int Bureaucrat::getGrade( ) const {
 }
 
 void Bureaucrat::incrementGrade( ) {
-	std::cout << this->name_ << "'s grade was increased" << std::endl;
-
+	
 	if ( ( grade_ - 1) < 1 )
 		throw GradeTooHighException( );
 	grade_ -= 1;
+	std::cout << this->name_ << "'s grade was increased" << std::endl;
 }
 
 void Bureaucrat::decrementGrade( ) {
-	std::cout << this->name_ << "'s grade was decreased" << std::endl;
-
+	
 	if ( ( grade_ + 1) > 150 )
 		throw GradeTooLowException( );
 	grade_ += 1;
+	std::cout << this->name_ << "'s grade was decreased" << std::endl;
 }
 
 const char* Bureaucrat::GradeTooHighException::what( ) const throw( ) {
@@ -86,6 +86,6 @@ void Bureaucrat::executeForm( const AForm& form ) const {
 }
 
 std::ostream& operator<<( std::ostream& out, const Bureaucrat& b ) {
-	out << b.getName( ) << ", burocrata com classificação " << b.getGrade();
+	out << b.getName( ) << ", bureaucrat grade " << b.getGrade();
 	return out;
 }

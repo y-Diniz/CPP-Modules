@@ -13,8 +13,8 @@ class Array {
 	public:
 		Array();
 		Array( unsigned int n );
-		Array( const Array & lhs );
-		Array & operator=( const Array & lhs );
+		Array( const Array & rhs );
+		Array & operator=( const Array & rhs );
 		T & operator[]( unsigned int index );
 		const T & operator[]( unsigned int index ) const;
 		unsigned int size( ) const;

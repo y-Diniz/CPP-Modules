@@ -1,4 +1,4 @@
-#include "Serialize.hpp"
+#include "Serializer.hpp"
 #include <iostream>
 
 int main() {
@@ -7,11 +7,11 @@ int main() {
 	Data *ptr = &data;
 	std::cout << "Data address: " << ptr << std::endl;
 
-	uintptr_t raw = Serialize::serialize(ptr);
-	std::cout << "Data serialized: " << raw << std::endl;
+	uintptr_t raw = Serializer::serialize(ptr);
+	std::cout << "Data Serializerd: " << raw << std::endl;
 
-	Data *ptr2 = Serialize::deserialize(raw);
-	std::cout << "Data deserialized: " << ptr2 << std::endl;
+	Data *ptr2 = Serializer::deserialize(raw);
+	std::cout << "Data deSerializerd: " << ptr2 << std::endl;
 
 	std::cout << "ptr == ptr2: " << (ptr == ptr2 ? 1 : 0) << std::endl ;
 

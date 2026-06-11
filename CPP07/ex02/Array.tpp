@@ -11,20 +11,20 @@ Array<T>::Array( unsigned int n ) : size_( n ) {
 }
 
 template < typename T>
-Array<T>::Array( const Array & lhs ) : size_( lhs.size_ ) {
+Array<T>::Array( const Array & rhs ) : size_( rhs.size_ ) {
 	array_ = new T[ size_ ];
 	for ( unsigned int i = 0; i < size_; i++ )
-		array_[ i ] = lhs.array_[ i ];
+		array_[ i ] = rhs.array_[ i ];
 }
 
 template < typename T>
-Array<T> & Array<T>::operator=( const Array<T> & lhs ) {
-	if ( this != &lhs ) {
+Array<T> & Array<T>::operator=( const Array<T> & rhs ) {
+	if ( this != &rhs ) {
 		delete[] array_;
-		size_ = lhs.size_;
+		size_ = rhs.size_;
 		array_ = new T[ size_ ];
 		for ( unsigned int i = 0; i < size_; i++ )
-			array_[ i ] = lhs.array_[ i ];
+			array_[ i ] = rhs.array_[ i ];
 	}
 	return *this;
 }

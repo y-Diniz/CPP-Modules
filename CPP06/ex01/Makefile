@@ -1,4 +1,4 @@
-NAME		:= build/serialize
+NAME		:= build/Serializer
 
 CPP			:= c++
 CPPFLAGS 	:= -Wall -Wextra -Werror -std=c++98
@@ -14,7 +14,7 @@ BLUE		:= \033[0;34m
 RESET		:= \033[0m
 
 # Files
-SRC			:= main.cpp Serialize.cpp
+SRC			:= main.cpp Serializer.cpp
 OBJ			:= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 $(NAME): $(OBJ)
