@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <algorithm>
+#include <iostream>
 
 Span::Span() : n_(0) { }
 
@@ -23,6 +24,12 @@ void Span::addNumber( unsigned int n ) {
 	span_.push_back(n);
 }
 
+void	Span::addRangeNumber(std::vector<unsigned int>::iterator begin, std::vector<unsigned int>::iterator end) {
+	if (span_.size() + std::distance(begin, end) > n_)
+		throw FullSpanException();
+	span_.insert(span_.end(), begin, end);
+}
+
 void Span::push( unsigned int n ) {
 	if (span_.size() + n > n_)
 		throw FullSpanException();
@@ -44,6 +51,10 @@ unsigned int Span::longestSpan() {
 	unsigned int min = *(std::min_element(span_.begin(), span_.end()));
 	unsigned int max = *(std::max_element(span_.begin(), span_.end()));
 	return max - min;
+}
+
+std::vector<unsigned int> &Span::getSpan() {
+	return span_;
 }
 
 const char* Span::FullSpanException::what() const throw() {

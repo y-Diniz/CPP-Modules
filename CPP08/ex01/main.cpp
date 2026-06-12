@@ -1,6 +1,7 @@
 #include "Span.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <exception>
 
 #define MAX_INT 20000
 
@@ -17,32 +18,15 @@ int main() {
 		sp.addNumber(9);
 		sp.addNumber(11);
 
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
-	}
+		std::cout << "The logest span is " << sp.longestSpan() << std::endl;
+		std::cout << "The shortest span is " << sp.shortestSpan() << std::endl;
 
-	{
 		Span s(10);
-
-		for (int i = 0; i < 10; i++) {
-
-			try {
-				s.addNumber(i);
-			} catch (std::exception & e) {
-				std::cout << e.what() << std::endl;
-			}
-
+		try {
+			s.addRangeNumber(sp.getSpan().begin(), sp.getSpan().end());
+		} catch (std::exception & e) {
+			std::cout << e.what() << std::endl;
 		}
-
-		std::cout << "The logest span is " << s.longestSpan() << std::endl;
-		std::cout << "The shortest span is " << s.shortestSpan() << std::endl;
-	}
-
-	
-	{
-		Span s(10000);
-
-		s.push(10000);
 
 		std::cout << "The logest span is " << s.longestSpan() << std::endl;
 		std::cout << "The shortest span is " << s.shortestSpan() << std::endl;

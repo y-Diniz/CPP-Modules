@@ -17,8 +17,10 @@ class Span {
 		~Span();
 		void addNumber( unsigned int n );
 		void push( unsigned int n );
+		void addRangeNumber(std::vector<unsigned int>::iterator begin, std::vector<unsigned int>::iterator end);
 		unsigned int shortestSpan();
 		unsigned int longestSpan();
+		std::vector<unsigned int> &getSpan();
 
 		class FullSpanException : public std::exception {
 			public:
