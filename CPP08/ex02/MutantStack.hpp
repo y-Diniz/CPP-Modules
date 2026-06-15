@@ -10,7 +10,7 @@ class MutantStack : public std::stack<T> {
 
 		MutantStack( const MutantStack<T> & rhs ) : std::stack<T>(rhs) {}
 
-		MutantStack<T> operator=( const MutantStack<T> & rhs ) {
+		MutantStack<T>& operator=( const MutantStack<T> & rhs ) {
 			if (this != &rhs)
 				std::stack<T>::operator=(rhs);
 			return *this;
@@ -18,14 +18,14 @@ class MutantStack : public std::stack<T> {
 
 		~MutantStack() {}
 		
-		typedef std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::iterator iterator;
 
 		iterator begin() {
-			return std::stack<T>::c.begin();
+			return this->c.begin();
 		}
 
 		iterator end() {
-			return std::stack<T>::c.end();
+			return this->c.end();
 		}
 
 };
