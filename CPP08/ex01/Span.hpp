@@ -7,7 +7,8 @@
 class Span {
 	private:
 		unsigned int n_;
-		std::vector<unsigned int> span_;
+		std::vector<int> span_;
+		unsigned int diff( unsigned int i ) const;
 	
 	public:
 		Span();
@@ -15,12 +16,13 @@ class Span {
 		Span( const Span & rhs );
 		Span & operator=( const Span & rhs );
 		~Span();
-		void addNumber( unsigned int n );
+		void addNumber( int n );
 		void push( unsigned int n );
-		void addRangeNumber(std::vector<unsigned int>::iterator begin, std::vector<unsigned int>::iterator end);
+		void addRangeNumber(std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end);
 		unsigned int shortestSpan();
-		unsigned int longestSpan();
-		std::vector<unsigned int> &getSpan();
+		unsigned int longestSpan() const;
+		
+		const std::vector<int> &getSpan() const;
 
 		class FullSpanException : public std::exception {
 			public:
