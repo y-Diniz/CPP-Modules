@@ -2,9 +2,9 @@
 #define EASYFIND_HPP
 
 template < typename T >
-typename T::iterator easyfind( T & container, int value ) {
+typename T::const_iterator easyfind( const T & container, int value ) {
 
-	typename T::iterator it;
+	typename T::const_iterator it;
 
 	for (it = container.begin(); it != container.end(); ++it) {
 		if (*it == value)

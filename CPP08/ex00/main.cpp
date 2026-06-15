@@ -14,7 +14,7 @@ int main() {
 		vector.push_back(42);
 		vector.push_back(7);
 
-		std::vector<int>::iterator it = easyfind( vector, 42 );
+		std::vector<int>::const_iterator it = easyfind( vector, 42 );
 
 		if (it != vector.end())
 			std::cout << "Found: " << *it << std::endl;
@@ -30,7 +30,7 @@ int main() {
 		list.push_back(93);
 		list.push_back(42);
 
-		std::list<int>::iterator it = easyfind( list, 42 );
+		std::list<int>::const_iterator it = easyfind( list, 42 );
 
 		if (it != list.end())
 			std::cout << "Found: " << *it << std::endl;
@@ -46,7 +46,7 @@ int main() {
 		deque.push_back(24);
 		deque.push_back(18);
 
-		std::deque<int>::iterator it = easyfind( deque, 42 );
+		std::deque<int>::const_iterator it = easyfind( deque, 42 );
 
 		if (it != deque.end())
 			std::cout << "Found: " << *it << std::endl;
