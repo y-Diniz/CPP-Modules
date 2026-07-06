@@ -4,11 +4,14 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <utility>
 
-static float toFloat( std::string & string );
+static float toFloat( const std::string & string );
 static void validateValue( float value );
 static void validateKey( const std::string & key );
 static int getFebDays( int year );
+
+// Rule of 3
 
 BitcoinExchange::BitcoinExchange() { }
 
@@ -24,43 +27,108 @@ BitcoinExchange & BitcoinExchange::operator=( const BitcoinExchange& other ) {
 
 BitcoinExchange::~BitcoinExchange() { }
 
-void BitcoinExchange::loadDataBase( std::string & filename ) {
+// DB parser
 
+void BitcoinExchange::loadDataBase( const std::string & filename ) {
+
+	std::ifstream file( filename.c_str() );
 	std::string line;
-	std::ifstream file( filename );
 
 	if (!file.is_open())
 		throw std::runtime_error( "Error: could not open file." );
 	
-	std::getline(file, line);
+	if (!std::getline(file, line))
+		throw std::runtime_error("Error: empty data base file.");
 
-	while (std::getline(file, line)) {
+	while ( std::getline( file, line ) ) {
 		try {
-			size_t pos = line.find_first_of( ',' , 0 );
+			std::string message = "Error: bad input => " + line;
+			size_t pos = line.find( ',' );
 			if (pos == std::string::npos)
-				throw std::runtime_error("Error: Invalid Format.");
+				throw std::runtime_error(message);
 			std::string key = line.substr( 0, pos );
 			validateKey(key);
 			std::string v = line.substr( pos + 1);
 			float value = toFloat( v );
 			_data_base.insert( std::make_pair( key, value ) );
-		} catch ( std::exception & e ) {
+		} catch ( const std::exception & e ) {
 			std::cout << e.what() << std::endl;
 		}
 	}
 }
 
+// Input parser
+
+void BitcoinExchange::inputParser( const std::string & filename ) {
+
+	std::ifstream file( filename.c_str() );
+	std::string line;
+
+	if (!file.is_open())
+		throw std::runtime_error( "Error: could not open file." );
+
+	if (!std::getline(file, line))
+		throw std::runtime_error("Error: empty input file.");
+
+	while ( std::getline( file, line ) ) {
+		try {
+			std::string message = "Error: bad input => " + line;
+			size_t pos = line.find( " | " );
+			if (pos == std::string::npos)
+				throw std::runtime_error( message );
+			std::string key = line.substr( 0, pos );
+			validateKey(key);
+			std::string v = line.substr( pos + 3 );
+			float value = toFloat( v );
+			validateValue( value );
+			computeExchange( key, value );
+		} catch ( const std::exception & e ) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+}
+
+void BitcoinExchange::computeExchange( const std::string & key, float value ) {
+	
+	float rate = getExchangeRate( key );
+	const float exchange = rate * value;
+
+	std::cout << key
+          << " => "
+          << value
+          << " = "
+          << exchange
+          << std::endl;
+}
+
+float BitcoinExchange::getExchangeRate( const std::string & key ) const {
+
+	if (_data_base.empty())
+		throw std::runtime_error( "Error: Empty Data Base" );
+
+	const_iterator it = _data_base.lower_bound( key );
+
+	if ( it == _data_base.begin() && it->first != key ) {
+		std::string message = "Error: no previous date available => " + key;
+		throw std::runtime_error( message );
+	}
+	else if ( it == _data_base.end() || it->first != key )
+		it--;
+
+	return it->second;
+}
+
 // static functions for the parser
 
-static float toFloat( std::string & string ) {
+static float toFloat( const std::string & string ) {
 	
 	float res;
 	std::stringstream ss(string);
 
-	if (!(ss >> res))
-		throw std::runtime_error( "Error: Conversion failed." );
-	if (!(ss.eof()))
-		throw std::runtime_error( "Error: Invalid Format." );
+	if ( !( ss >> res ) || !( ss.eof() ) ) {
+		std::string message = "Error: bad input => " + string;
+		throw std::runtime_error( message );
+	}
 
 	return res;
 }
