@@ -23,7 +23,7 @@ RPN::~RPN() { }
 
 void RPN::parseExpression( char *s ) {
 
-	while ( isspace( (unsigned char)*s ) )
+	while ( isspace( static_cast<unsigned char>(*s) ) )
 		s++;
 
 	if ( !*s )
