@@ -1,5 +1,9 @@
 #include "PMergeMe.hpp"
 #include <iostream>
+#include <string>
+
+std::vector<int> chainParser( char **av );
+std::string errorMessage( std::string message, std::string param );
 
 int main( int ac, char **av ) {
 

@@ -19,8 +19,6 @@ RPN & RPN::operator=( const RPN & other ) {
 
 RPN::~RPN() { }
 
-// parse
-
 void RPN::parseExpression( char *s ) {
 
 	while ( isspace( static_cast<unsigned char>(*s) ) )

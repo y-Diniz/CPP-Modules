@@ -2,7 +2,6 @@
 #define PMERGEME_HPP
 
 #include <deque>
-#include <string>
 #include <vector>
 
 class PMergeMe {
@@ -18,8 +17,5 @@ class PMergeMe {
 		std::deque<int> _dequeChain;
 		std::vector<int> _vectorChain;
 };
-
-std::vector<int> chainParser( char **av );
-std::string errorMessage( std::string message, std::string param );
 
 #endif

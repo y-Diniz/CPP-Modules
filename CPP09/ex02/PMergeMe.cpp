@@ -1,8 +1,5 @@
 #include "PMergeMe.hpp"
-#include <cctype>
-#include <climits>
-#include <cstdlib>
-#include <stdexcept>
+#include <utility>
 
 PMergeMe::PMergeMe() { }
 
@@ -20,36 +17,13 @@ PMergeMe & PMergeMe::operator=( const PMergeMe & other ) {
 
 PMergeMe::~PMergeMe() { }
 
-// Parser
-
-std::vector<int> chainParser( char **av ) {
+void fordJohnson( std::vector<int> chain ) {
+	std::vector< std::pair<int, int> > pairs;
 	
-	std::vector<int> chain;
-	char *end;
-
-	for ( int i = 0; av[i]; i++ ) {
-		long int n = strtol( av[i], &end, 10 );
-
-		if ( end == &(av[i][0]) )
-			throw std::runtime_error( "Error: coudn't convert" );
-
-		if ( *end != '\0' ) {
-			while ( *end ) {
-				if ( !isspace( static_cast<unsigned char>(*end) ) )
-					throw std::runtime_error( errorMessage( "invalid input:", av[i] ) );
-				end++;	
-			}
-		}
-
-		if (n < 0 || n > INT_MAX )
-			throw std::runtime_error( errorMessage( "number off limits:", av[i] ) );
-
-		chain.push_back( static_cast<int>(n) );
+	if (chain.size() <= 2) {
+		
 	}
-
-	return chain;
-}
-
-std::string errorMessage( std::string message, std::string param ) {
-	return "Error: " + message + " " + param;
+	for ( int i = 0; i <= chain.size() - 2; i+=2 )
+		pairs.push_back( std::make_pair( chain[i], chain[i+1]) );
+	// tratar straggler
 }
