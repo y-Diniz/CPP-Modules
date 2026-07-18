@@ -4,6 +4,10 @@
 #include <stdexcept>
 #include <vector>
 
+std::string errorMessage( std::string message, std::string param ) {
+	return "Error: " + message + " " + param;
+}
+
 std::vector<int> chainParser( char **av ) {
 	
 	std::vector<int> chain;
@@ -30,8 +34,4 @@ std::vector<int> chainParser( char **av ) {
 	}
 
 	return chain;
-}
-
-std::string errorMessage( std::string message, std::string param ) {
-	return "Error: " + message + " " + param;
 }
