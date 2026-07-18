@@ -1,4 +1,4 @@
-NAME		:= build/PMergeMe
+NAME		:= build/PmergeMe
 CPP			:= c++
 CPPFLAGS 	:= -Wall -Wextra -Werror -std=c++98
 
@@ -13,8 +13,8 @@ BLUE		:= \033[0;34m
 RESET		:= \033[0m
 
 # Files
-SRC			:=	main.cpp PMergeMe.cpp parser.cpp vectorChain.cpp dequeChain.cpp
-HEADERS		:=	PMergeMe.hpp
+SRC			:=	src/main.cpp src/PmergeMe.cpp src/parser.cpp src/vectorChain.cpp src/dequeChain.cpp
+HEADERS		:=	PmergeMe.hpp
 OBJ			:=	$(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 $(NAME): $(OBJ)

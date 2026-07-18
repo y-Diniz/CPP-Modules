@@ -1,4 +1,4 @@
-#include "PMergeMe.hpp"
+#include "../PmergeMe.hpp"
 #include <algorithm>
 
 static std::vector< int > jacobsthalSequence(std::size_t size) {
@@ -29,7 +29,7 @@ static void binaryInsert( std::vector< int > & chain, int value, size_t target )
 	
 }
 
-std::vector< int > PMergeMe::fordJohnson( const std::vector<int> & chain ) {
+std::vector< int > PmergeMe::fordJohnson( const std::vector<int> & chain ) {
 
 	size_t c_size = chain.size();
 	
@@ -65,18 +65,14 @@ std::vector< int > PMergeMe::fordJohnson( const std::vector<int> & chain ) {
 		}
 	}
 
-	if ( c_size % 2 != 0 )
-		losers.push_back(chain[c_size - 1]);
-
 	size_t l_size = losers.size();
 	std::vector< int > sequence = jacobsthalSequence(l_size + 2);
 
 	size_t first = 1;
 	size_t j = 1;
-	size_t last;
 
 	while ( first <= l_size ) {
-		last = sequence[j] - 1;
+		size_t last = sequence[j] - 1;
 		if (last > l_size)
 			last = l_size;
 		
@@ -84,15 +80,16 @@ std::vector< int > PMergeMe::fordJohnson( const std::vector<int> & chain ) {
 			int winner = winners[i];
 			int loser = losers[i - 1];
 			std::size_t target = ordered.size();
-			if (i != 1) {
-				std::vector<int>::iterator it = std::find(ordered.begin(), ordered.end(), winner);
+			std::vector<int>::iterator it = std::find(ordered.begin(), ordered.end(), winner);
 			target = static_cast<std::size_t>(it - ordered.begin());
-			}
 			binaryInsert(ordered, loser, target);
 		}
 		first = last + 1;
 		++j;
 	}
+
+	if ( c_size % 2 != 0 )
+		binaryInsert(ordered, chain[c_size - 1], ordered.size());
 
 	return ordered;
 }
