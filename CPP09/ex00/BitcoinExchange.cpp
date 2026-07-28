@@ -155,7 +155,7 @@ static void validateKey( const std::string & key ) {
 
 	int max_days[] = {0, 31, getFebDays(y), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-	if ( !( m >= 1 && m <= 12 ) || !( max_days[m] >= d && d >= 1 ) || y < 2009 )
+	if ( !( m >= 1 && m <= 12 ) || !( max_days[m] >= d && d >= 1 ) )
 		throw std::runtime_error( message );
 }
 
