@@ -79,9 +79,8 @@ std::deque<int> PmergeMe::fordJohnson( const std::deque<int> & chain ) {
 		for ( size_t i = last; i >= first; i-- ) {
 			int winner = winners[i];
 			int loser = losers[i - 1];
-			std::size_t target = ordered.size();
 			std::deque<int>::iterator it = std::find(ordered.begin(), ordered.end(), winner);
-			target = static_cast<std::size_t>(it - ordered.begin());
+			std::size_t target = static_cast<std::size_t>(it - ordered.begin());
 			binaryInsert(ordered, loser, target);
 		}
 		first = last + 1;

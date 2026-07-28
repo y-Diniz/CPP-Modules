@@ -40,13 +40,13 @@ void PmergeMe::processSort() {
 	std::vector<int> vectorOrdered = fordJohnson(_vector);
 	gettimeofday(&end, NULL);
 
-	long vectorTime = (end.tv_sec - start.tv_sec) * 1000000L + (end.tv_usec - start.tv_usec);
+	long vectorTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
 
 	gettimeofday(&start, NULL);
 	std::deque<int> dequeOrdered = fordJohnson(_deque);
 	gettimeofday(&end, NULL);
 
-	long dequeTime = (end.tv_sec - start.tv_sec) * 1000000L + (end.tv_usec - start.tv_usec);
+	long dequeTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
 
 	std::cout << "Before: ";
 	printChain(_vector);
